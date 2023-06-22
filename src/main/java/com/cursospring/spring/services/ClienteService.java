@@ -10,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.cursospring.spring.domain.Categoria;
 import com.cursospring.spring.domain.Cidade;
 import com.cursospring.spring.domain.Cliente;
 import com.cursospring.spring.domain.Endereco;
@@ -61,7 +59,7 @@ public class ClienteService {
 		try {
 			repo.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir um cliente com pedido");
+			throw new DataIntegrityException("Não é possível excluir um cliente com pedidos relacionados.");
 		}
 		
 	}
