@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.cursospring.spring.domain.Categoria;
+import com.cursospring.entities.Categoria;
 import com.cursospring.spring.dto.CategoriaDTO;
 import com.cursospring.spring.repositories.CategoriaRepository;
 import com.cursospring.spring.services.exceptions.DataIntegrityException;

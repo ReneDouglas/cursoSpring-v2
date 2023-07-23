@@ -10,10 +10,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.cursospring.spring.domain.Cidade;
-import com.cursospring.spring.domain.Cliente;
-import com.cursospring.spring.domain.Endereco;
-import com.cursospring.spring.domain.enums.TipoCliente;
+
+import com.cursospring.entities.Cidade;
+import com.cursospring.entities.Cliente;
+import com.cursospring.entities.Endereco;
+import com.cursospring.entities.enums.TipoCliente;
 import com.cursospring.spring.dto.ClienteDTO;
 import com.cursospring.spring.dto.ClienteNewDTO;
 import com.cursospring.spring.repositories.ClienteRepository;

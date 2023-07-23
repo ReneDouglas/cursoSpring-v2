@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.cursospring.spring.domain.Categoria;
+import com.cursospring.entities.Categoria;
 
 public class CategoriaDTO implements Serializable{
 	
