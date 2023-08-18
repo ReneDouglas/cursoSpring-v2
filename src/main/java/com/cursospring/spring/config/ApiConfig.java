@@ -8,7 +8,7 @@ import com.cursospring.entities.PagamentoComBoleto;
 import com.cursospring.entities.PagamentoComCartao;
 import com.cursospring.spring.services.MailService;
 import com.cursospring.spring.services.MockMailService;
-import com.cursospring.spring.services.SmtpMailService;
+//import com.cursospring.spring.services.SmtpMailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration

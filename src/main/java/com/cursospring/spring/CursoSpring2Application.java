@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.cursospring.entities.Categoria;
 import com.cursospring.entities.Cidade;
@@ -21,6 +22,7 @@ import com.cursospring.entities.PagamentoComCartao;
 import com.cursospring.entities.Pedido;
 import com.cursospring.entities.Produto;
 import com.cursospring.entities.enums.EstadoPagamento;
+import com.cursospring.entities.enums.Perfil;
 import com.cursospring.entities.enums.TipoCliente;
 import com.cursospring.spring.repositories.CategoriaRepository;
 import com.cursospring.spring.repositories.CidadeRepository;
@@ -38,22 +40,33 @@ public class CursoSpring2Application implements CommandLineRunner{
 	
 	@Autowired
 	private CategoriaRepository catRepo;
+	
 	@Autowired
 	private ProdutoRepository prodRepo;
+	
 	@Autowired
 	private EstadoRepository estRepo;
+	
 	@Autowired
 	private CidadeRepository cidRepo;
+	
 	@Autowired
 	private ClienteRepository cliRepo;
+	
 	@Autowired
 	private EnderecoRepository endRepo;
+	
 	@Autowired
 	private PedidoRepository pedRepo;
+	
 	@Autowired
 	private PagamentoRepository pagtoRepo;
+	
 	@Autowired
 	private ItemPedidoRepository itemPedRepo;
+	
+	@Autowired
+	private BCryptPasswordEncoder pw;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursoSpring2Application.class, args);
@@ -119,17 +132,22 @@ public class CursoSpring2Application implements CommandLineRunner{
 		estRepo.saveAll(Arrays.asList(est1, est2));
 		cidRepo.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Cliente cli1 = new Cliente(null, "Maria Silva", "rene.douglas.bsi@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
-		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "renednmorais@gmail.com", "36378912377", TipoCliente.PESSOAFISICA, pw.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		
+		Cliente cli2 = new Cliente(null, "Renê Morais", "rene.douglas.bsi@gmail.com", "03293033091", TipoCliente.PESSOAFISICA, pw.encode("123"));
+		cli2.addPerfil(Perfil.ADMIN);
+		cli2.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 		
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		Endereco e3 = new Endereco(null, "Teste Teste", "10", null, "Centro", "38777012", cli2, c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 		
-		cliRepo.saveAll(Arrays.asList(cli1));
-		endRepo.saveAll(Arrays.asList(e1, e2));
+		cliRepo.saveAll(Arrays.asList(cli1, cli2));
+		endRepo.saveAll(Arrays.asList(e1, e2, e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
