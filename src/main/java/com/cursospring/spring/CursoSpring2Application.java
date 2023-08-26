@@ -33,6 +33,7 @@ import com.cursospring.spring.repositories.ItemPedidoRepository;
 import com.cursospring.spring.repositories.PagamentoRepository;
 import com.cursospring.spring.repositories.PedidoRepository;
 import com.cursospring.spring.repositories.ProdutoRepository;
+import com.cursospring.spring.services.S3Service;
 
 @SpringBootApplication
 @EntityScan(basePackages={"com.cursospring.spring.domain","com.cursospring.entities"})
@@ -67,6 +68,7 @@ public class CursoSpring2Application implements CommandLineRunner{
 	
 	@Autowired
 	private BCryptPasswordEncoder pw;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursoSpring2Application.class, args);
@@ -176,6 +178,7 @@ public class CursoSpring2Application implements CommandLineRunner{
 		p3.getItens().addAll(Arrays.asList(ip2));
 		
 		itemPedRepo.saveAll(Arrays.asList(ip1, ip2, ip3));
+		
 	}
 
 }

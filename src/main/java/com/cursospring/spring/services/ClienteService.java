@@ -1,5 +1,6 @@
 package com.cursospring.spring.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cursospring.entities.Cidade;
 import com.cursospring.entities.Cliente;
@@ -37,6 +39,9 @@ public class ClienteService {
 	
 	@Autowired
 	private BCryptPasswordEncoder pw;
+	
+	@Autowired
+	private S3Service s3;
 	
 	public Cliente find(Integer id) {
 		
@@ -105,6 +110,10 @@ public class ClienteService {
 			cli.getTelefones().add(objDto.getTelefone3());
 		}
 		return cli;
+	}
+	
+	public URI uploadProfilePicture(MultipartFile file) {
+		return s3.uploadFile(file);
 	}
 	
 }
