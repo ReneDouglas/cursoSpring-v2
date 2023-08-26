@@ -9,6 +9,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
+
 public class SmtpMailService extends AbstractEmailService{
 
 	private static final Logger LOG = LoggerFactory.getLogger(SmtpMailService.class);
