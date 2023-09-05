@@ -41,13 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/h2-console/**"
 	};
 	
-	private static final String[] PUBLIC_MATCHES_GET = {
+	private static final String[] PUBLIC_MATCHERS_GET = {
 			"/produtos/**",
 			"/categorias/**",
-			"/clientes/**"
+			"/estados/**",
 	};
 	
-	private static final String[] PUBLIC_MATCHES_POST = {
+	private static final String[] PUBLIC_MATCHERS_POST = {
 			"/clientes",
 			"/auth/forgot/**",
 			
@@ -62,8 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.POST, PUBLIC_MATCHES_POST).permitAll()
-		.antMatchers(HttpMethod.GET, PUBLIC_MATCHES_GET).permitAll()
+		.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
+		.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
 		.antMatchers(PUBLIC_MATCHES).permitAll()
 		.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
@@ -74,8 +74,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
+		config.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		source.registerCorsConfiguration("/**", config);
 		return source;
 	}
 	
